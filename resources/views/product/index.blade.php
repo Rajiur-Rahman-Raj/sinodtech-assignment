@@ -14,8 +14,7 @@
                     </li>
 
                     <li class="breadcrumb-item active">
-                        Branches
-
+products
                     </li>
                 </ol>
             </nav>
@@ -30,20 +29,22 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">name</th>
-                                    <th scope="col">code</th>
+                                    <th scope="col">sku</th>
+                                    <th scope="col">price</th>
                                     <th scope="col">status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($branches as $key => $branch)
+                                @forelse ($products as $key => $product)
                                     <tr>
                                         <th scope="row">{{ ++$key }}</th>
-                                        <td>{{ $branch->name }}</td>
-                                        <td>{{ $branch->code }}</td>
-                                        <td> {!! getStatusBadge($branch->status) !!}</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->sku }}</td>
+                                        <td>{{ $product->price }} TK</td>
+                                        <td> {!! getStatusBadge($product->status) !!}</td>
                                     </tr>
                                 @empty
-                                    {!! showEmptyState('No branches found') !!}
+                                    {!! showEmptyState('No products found') !!}
                                 @endforelse
 
                             </tbody>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/branches', [BranchController::class, 'index'])->name('branch.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('product.index');
     });
 
 require __DIR__.'/auth.php';

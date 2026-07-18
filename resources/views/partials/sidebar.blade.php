@@ -27,5 +27,12 @@
                 Branches
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('product.index') }}" class="nav-link {{ request()->routeIs('product.*') ? 'active' : '' }}">
+                <i class="bi bi-box-seam me-2"></i>
+                Products
+            </a>
+        </li>
     </ul>
 </div>
