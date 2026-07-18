@@ -24,19 +24,7 @@
             @include('partials.navbar')
 
             <div class="container-fluid py-4">
-                <nav class="mb-4">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard') }}">
-                                Home
-                            </a>
-                        </li>
 
-                        <li class="breadcrumb-item active">
-                            Dashboard
-                        </li>
-                    </ol>
-                </nav>
 
                 @yield('content')
 
