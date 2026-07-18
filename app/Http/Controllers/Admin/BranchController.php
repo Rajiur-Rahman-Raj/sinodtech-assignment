@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
-use Illuminate\Http\Request;
 
 class BranchController extends Controller
 {
@@ -17,5 +16,14 @@ class BranchController extends Controller
             ->get();
 
         return view('branch.index', compact('branches'));
+    }
+    public function details(Branch $branch)
+    {
+        $branch->load('inventories.product');
+
+        $branch->loadCount('inventories as total_products');
+        $branch->loadSum('inventories as total_stock', 'quantity');
+
+        return view('branch.details', compact('branch'));
     }
 }

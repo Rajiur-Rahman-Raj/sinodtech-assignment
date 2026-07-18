@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Products')
 
 @section('content')
     <div class="container">
@@ -14,7 +14,7 @@
                     </li>
 
                     <li class="breadcrumb-item active">
-products
+                        products
                     </li>
                 </ol>
             </nav>
@@ -33,6 +33,7 @@ products
                                     <th scope="col">price</th>
                                     <th scope="col">Total Stock</th>
                                     <th scope="col">status</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,6 +45,10 @@ products
                                         <td>{{ $product->price }} TK</td>
                                         <td>{{ $product->total_stock ?? 0 }}</td>
                                         <td> {!! getStatusBadge($product->status) !!}</td>
+                                        <td>
+                                            <a href="{{ route('product.details', $product->id) }}" title="details"><i
+                                                    class="bi bi-eye" style="font-size:20px"></i></a>
+                                        </td>
                                     </tr>
                                 @empty
                                     {!! showEmptyState('No products found') !!}

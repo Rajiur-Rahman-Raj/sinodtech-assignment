@@ -20,7 +20,10 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/branches', [BranchController::class, 'index'])->name('branch.index');
+    Route::get('/branch/details/{branch}', [BranchController::class, 'details'])->name('branch.details');
+
     Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/details/{product}', [ProductController::class, 'details'])->name('product.details');
     });
 
 require __DIR__.'/auth.php';

@@ -16,4 +16,14 @@ class ProductController extends Controller
             ->get();
         return view('product.index', compact('products'));
     }
+    public function details(Product $product)
+    {
+        $product->load([
+            'inventories.branch'
+        ]);
+
+        $product->loadSum('inventories as total_stock', 'quantity');
+
+        return view('product.details', compact('product'));
+    }
 }

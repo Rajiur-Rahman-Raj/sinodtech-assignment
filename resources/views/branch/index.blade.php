@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Branches')
 
 @section('content')
     <div class="container">
@@ -34,6 +34,7 @@
                                     <th scope="col">Total Products</th>
                                     <th scope="col">Total Stocks</th>
                                     <th scope="col">status</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,9 @@
                                         <td>{{ $branch->total_products }}</td>
                                         <td>{{ $branch->total_stock ?? 0 }}</td>
                                         <td> {!! getStatusBadge($branch->status) !!}</td>
+                                        <td>
+                                            <a href="{{ route('branch.details', $branch->id) }}" title="details"><i class="bi bi-eye" style="font-size:20px"></i></a>
+                                        </td>
                                     </tr>
                                 @empty
                                     {!! showEmptyState('No branches found') !!}
