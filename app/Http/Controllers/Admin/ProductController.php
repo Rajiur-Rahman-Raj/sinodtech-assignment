@@ -10,7 +10,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::whereStatus(1)->get();
+        $products = $products = Product::query()
+            ->withSum('inventories as total_stock', 'quantity')
+            ->whereStatus(1)
+            ->get();
         return view('product.index', compact('products'));
     }
 }

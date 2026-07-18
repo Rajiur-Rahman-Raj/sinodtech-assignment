@@ -31,6 +31,7 @@ products
                                     <th scope="col">name</th>
                                     <th scope="col">sku</th>
                                     <th scope="col">price</th>
+                                    <th scope="col">Total Stock</th>
                                     <th scope="col">status</th>
                                 </tr>
                             </thead>
@@ -41,6 +42,7 @@ products
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->sku }}</td>
                                         <td>{{ $product->price }} TK</td>
+                                        <td>{{ $product->total_stock ?? 0 }}</td>
                                         <td> {!! getStatusBadge($product->status) !!}</td>
                                     </tr>
                                 @empty

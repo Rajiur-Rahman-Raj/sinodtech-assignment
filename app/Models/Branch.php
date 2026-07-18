@@ -16,4 +16,9 @@ class Branch extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

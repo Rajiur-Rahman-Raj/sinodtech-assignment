@@ -17,4 +17,9 @@ class Product extends Model
         'price' => 'decimal:2',
         'status' => 'boolean',
     ];
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

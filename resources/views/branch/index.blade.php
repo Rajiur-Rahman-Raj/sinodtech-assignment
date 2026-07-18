@@ -31,6 +31,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">name</th>
                                     <th scope="col">code</th>
+                                    <th scope="col">Total Products</th>
+                                    <th scope="col">Total Stocks</th>
                                     <th scope="col">status</th>
                                 </tr>
                             </thead>
@@ -40,6 +42,8 @@
                                         <th scope="row">{{ ++$key }}</th>
                                         <td>{{ $branch->name }}</td>
                                         <td>{{ $branch->code }}</td>
+                                        <td>{{ $branch->total_products }}</td>
+                                        <td>{{ $branch->total_stock ?? 0 }}</td>
                                         <td> {!! getStatusBadge($branch->status) !!}</td>
                                     </tr>
                                 @empty
