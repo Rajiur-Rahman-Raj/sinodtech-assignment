@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\LostCustomerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\ProfileController;
@@ -31,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/customers/{customer}', [CustomerController::class, 'details'])
         ->name('customer.details');
+
+    Route::get('/lost-customers', [LostCustomerController::class, 'index'])
+        ->name('lost.customer.index');
 
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 

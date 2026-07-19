@@ -22,4 +22,10 @@ class Customer extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
+    public function latestSale()
+    {
+        return $this->hasOne(Sale::class)
+            ->latestOfMany('sale_date');
+    }
 }
