@@ -37,9 +37,17 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('customer.index') }}" class="nav-link {{ request()->routeIs('customer.*') ? 'active' : '' }}">
+            <a href="{{ route('customer.index') }}"
+                class="nav-link {{ request()->routeIs('customer.*') ? 'active' : '' }}">
                 <i class="bi bi-people me-2"></i>
                 Customers
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('employee.index') }}" class="nav-link {{ request()->routeIs('employee.index.*') ? 'active' : '' }}">
+                <i class="bi bi-person-badge me-2"></i>
+                Employees
             </a>
         </li>
     </ul>

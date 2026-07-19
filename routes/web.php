@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/details/{product}', [ProductController::class, 'details'])->name('product.details');
 
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 
     });
 
