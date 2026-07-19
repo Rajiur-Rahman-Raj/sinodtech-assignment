@@ -1,66 +1,426 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SinodTech CRM & Sales Management Assignment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 11 based Sales & Customer Relationship Management (CRM) application developed as part of the SinodTech Technical Assessment.
 
-## About Laravel
+The project demonstrates Sales & Inventory Management, Customer Relationship Management (CRM), Employee Assignment, KPI Tracking, Email Queue, Invoice Email and Secure REST API implementation.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Technology Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.3+
+- Laravel 11
+- MySQL
+- Blade
+- Bootstrap 5
+- jQuery
+- Laravel Queue (Database Driver)
+- Laravel Sanctum
+- SMTP (Mailtrap)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Completed Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 1. Sales & Inventory Management
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Product Catalog
+- Multi Branch Inventory
+- Record Sales
+- Automatic Inventory Deduction
+- Prevent Negative Stock
+- Invoice Number Generation
+- Sale Details Page
+- HTML Invoice Email
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 2. Customer Relationship Management (CRM)
 
-### Premium Partners
+### Customer Purchase History
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Purchase Records
+- Purchase Frequency
+- Last Purchase Date
+- Total Purchase Amount
 
-## Contributing
+### Lost Customer Detection
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Customers who have not purchased within the configurable period (default 90 days) are automatically identified as Lost Customers.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Customer Re-engagement
 
-## Security Vulnerabilities
+- Promotional Email
+- Queue Based Email Sending
+- SMTP Integration (Mailtrap)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### Employee Assignment
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Assign Lost Customers to Employees
+- One Customer → One Employee
+- Employee retains ownership permanently
+
+---
+
+### KPI Tracking
+
+Employee KPI automatically increases when:
+
+- A Lost Customer purchases again
+- A Never Purchased customer purchases for the first time
+
+Employee KPI does **NOT** increase for already active customers.
+
+---
+
+## 3. Email Invoice
+
+After every successful sale:
+
+- HTML Invoice is generated
+- Invoice is sent automatically using Queue
+
+---
+
+## 4. Secure REST API
+
+Implemented using Laravel Sanctum.
+
+### Endpoint
+
+```
+POST /api/token
+```
+
+Returns
+
+```
+Bearer Token
+```
+
+Authenticated Endpoint
+
+```
+GET /api/products
+```
+
+Response
+
+```
+SKU
+Product Name
+Price
+Available Stock
+```
+
+---
+
+# Business Flow
+
+```
+Branch
+
+↓
+
+Inventory
+
+↓
+
+Customer
+
+↓
+
+Sale
+
+↓
+
+Inventory Deduction
+
+↓
+
+Purchase History
+
+↓
+
+Lost Customer Detection
+
+↓
+
+Employee Assignment
+
+↓
+
+Customer Purchases Again
+
+↓
+
+Employee KPI Increased
+
+↓
+
+Invoice Email Sent
+```
+
+---
+
+# Installation
+
+Clone Repository
+
+```bash
+git clone https://github.com/Rajiur-Rahman-Raj/sinodtech-assignment.git
+```
+
+```bash
+cd sinodtech-assignment
+```
+
+Install Dependencies
+
+```bash
+composer install
+```
+
+```bash
+npm install
+```
+
+Copy Environment File
+
+```bash
+cp .env.example .env
+```
+
+Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+---
+
+# Environment Configuration
+
+Configure your database inside the `.env` file.
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sinodtech
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Configure Mailtrap SMTP
+
+```
+MAIL_MAILER=smtp
+MAIL_HOST=your-host
+MAIL_PORT=587
+MAIL_USERNAME=your-username
+MAIL_PASSWORD=your-password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@example.com
+MAIL_FROM_NAME="SinodTech"
+```
+
+Queue Driver
+
+```
+QUEUE_CONNECTION=database
+```
+
+---
+
+# Database Setup
+
+Run Migrations
+
+```bash
+php artisan migrate
+```
+
+Run Seeders
+
+```bash
+php artisan db:seed
+```
+
+Or
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
+
+# Run Queue Worker
+
+Required for
+
+- Promotion Email
+- Invoice Email
+
+```bash
+php artisan queue:work
+```
+
+---
+
+# Start Development Server
+
+Backend
+
+```bash
+php artisan serve
+```
+
+Frontend
+
+```bash
+npm run dev
+```
+
+---
+
+# Seeded Data
+
+The application includes realistic sample data for:
+- Admin
+- Branches
+- Products
+- Inventory
+- Customers
+- Employees
+- Sales
+- Sale Items
+- CustomerAssignment
+- InventoryAdjustmentSeeder
+
+The project is ready for testing immediately after running the seeders.
+
+---
+
+# REST API
+
+## Generate Token
+
+```
+POST
+
+/api/token
+```
+
+Body
+
+```json
+{
+    "email":"admin@example.com",
+    "password":"password"
+}
+```
+
+---
+
+Use Returned Token
+
+```
+Authorization
+
+Bearer YOUR_TOKEN
+```
+
+---
+
+Get Products
+
+```
+GET
+
+/api/products
+```
+
+Returns
+
+```json
+[
+    {
+        "sku":"LAP-1001",
+        "product_name":"Dell Inspiron 15",
+        "price":"65000.00",
+        "available_stock":20
+    }
+]
+```
+
+---
+
+# Project Structure
+
+```
+Branch
+│
+├── Product
+│
+├── Inventory
+│
+├── Customer
+│
+├── Employee
+│
+├── Sales
+│
+├── Purchase History
+│
+├── Lost Customer Detection
+│
+├── Employee Assignment
+│
+├── KPI Tracking
+│
+├── Promotion Email
+│
+├── Invoice Email
+│
+└── REST API
+```
+
+---
+
+# Queue Features
+
+- Promotion Email Queue
+- Invoice Email Queue
+
+---
+
+# Authentication
+
+- Session Authentication (Admin Panel)
+- Laravel Sanctum (REST API)
+
+---
+
+# Notes
+
+- Inventory is maintained per branch.
+- Stock is deducted automatically after every sale.
+- Negative stock is prevented.
+- Lost customer period is configurable.
+- Employee KPI is calculated automatically based on customer re-engagement.
+- Email sending is processed asynchronously using Laravel Queue.
+
+---
+
+# Author
+
+**Rajiur Rahman**
+
+Software Engineer
+
+Laravel Developer
