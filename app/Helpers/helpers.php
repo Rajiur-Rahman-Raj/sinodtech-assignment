@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Sale;
+
 if (!function_exists('getStatusBadge')) {
     function getStatusBadge($status)
     {
@@ -25,4 +27,17 @@ if (!function_exists('showEmptyState')) {
         ';
     }
 }
+
+if (!function_exists('generateInvoiceNo')) {
+    function generateInvoiceNo()
+    {
+        return 'INV-' . now()->format('Ymd') . '-' . str_pad(
+            Sale::count() + 1,
+            5,
+            '0',
+            STR_PAD_LEFT
+        );
+    }
+}
+
 

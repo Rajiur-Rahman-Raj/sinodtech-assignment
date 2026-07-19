@@ -25,6 +25,7 @@
 
             <div class="container-fluid py-4">
 
+                @include('partials.flash')
 
                 @yield('content')
 

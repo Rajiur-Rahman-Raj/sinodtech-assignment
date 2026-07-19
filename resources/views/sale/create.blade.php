@@ -23,6 +23,9 @@
 
         <form action="{{ route('sale.store') }}" method="POST">
             @csrf
+
+            @include('partials.validation-errors')
+
             <div class="card shadow-sm">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
@@ -40,18 +43,24 @@
                                 Branch
                             </label>
 
-                            <select name="branch_id" id="branch_id" class="form-select" required>
+                            <select name="branch_id" id="branch_id"
+                                class="form-select @error('branch_id') is-invalid @enderror">
                                 <option value="">
                                     Select Branch
                                 </option>
                                 @foreach ($branches as $branch)
-                                    <option value="{{ $branch->id }}">
-
+                                    <option value="{{ $branch->id }}"
+                                        {{ old('branch_id') == $branch->id ? 'selected' : '' }}>
                                         {{ $branch->name }}
-
                                     </option>
                                 @endforeach
                             </select>
+
+                            @error('branch_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="col-md-4 mb-3">
@@ -59,26 +68,40 @@
                                 Customer
                             </label>
 
-                            <select name="customer_id" class="form-select" required>
+                            <select name="customer_id" class="form-select @error('customer_id') is-invalid @enderror">
                                 <option value="">
                                     Select Customer
                                 </option>
+
                                 @foreach ($customers as $customer)
-                                    <option value="{{ $customer->id }}">
+                                    <option value="{{ $customer->id }}"
+                                        {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
 
                                         {{ $customer->name }}
 
                                     </option>
                                 @endforeach
                             </select>
+                            @error('customer_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label class="form-label">
                                 Sale Date
                             </label>
-                            <input type="date" name="sale_date" class="form-control" value="{{ now()->format('Y-m-d') }}"
-                                required>
+                            <input type="date" name="sale_date" value="{{ old('sale_date', now()->format('Y-m-d')) }}"
+                                class="form-control @error('sale_date') is-invalid @enderror"
+                                value="{{ now()->format('Y-m-d') }}">
+
+                            @error('sale_date')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -125,7 +148,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="products[0][product_id]" class="form-select product-select" required>
+                                    <select name="products[0][product_id]" class="form-select product-select">
 
                                         <option value="">
 
@@ -198,7 +221,7 @@
 
                             ${item.product.name}
                             (${item.product.sku})
-                            - Stock (${item.stock_quantity})
+                            - Stock (${item.quantity})
 
                         </option>
                     `;

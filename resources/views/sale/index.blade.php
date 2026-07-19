@@ -48,7 +48,7 @@
                                         <td>{{ $sale->sale_date }}</td>
                                         <td>{{ number_format($sale->grand_total, 2) }}</td>
                                         <td>
-                                            <a href="#" title="details"><i class="bi bi-eye"
+                                            <a href="{{ route('sale.details', $sale) }}" title="details"><i class="bi bi-eye"
                                                     style="font-size:20px"></i></a>
                                         </td>
                                     </tr>

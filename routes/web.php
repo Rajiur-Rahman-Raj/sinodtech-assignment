@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
     Route::get('/sale/create', [SaleController::class, 'create'])->name('sale.create');
     Route::post('/sale/store', [SaleController::class, 'store'])->name('sale.store');
+    Route::get('/sale/details/{sale}', [SaleController::class, 'details'])->name('sale.details');
 
     Route::get('/branch-products/{branch}', [SaleController::class, 'branchProducts'])->name('sale.branch.products');
 });

@@ -6,12 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Branch;
 use App\Models\Customer;
 use App\Models\Inventory;
-use App\Models\Product;
 use App\Models\Sale;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreSaleRequest;
+use App\Services\SaleService;
+
+use Illuminate\Validation\ValidationException;
 
 class SaleController extends Controller
 {
+
+    public function __construct(
+        private SaleService $saleService
+    ) {
+    }
     public function index()
     {
         $sales = Sale::with('customer', 'branch')
@@ -25,12 +32,10 @@ class SaleController extends Controller
     {
         $branches = Branch::whereStatus(1)->get();
         $customers = Customer::whereStatus(1)->get();
-        $products = Product::whereStatus(true)->orderBy('name')->get();
 
         return view('sale.create', compact(
             'branches',
-            'customers',
-            'products'
+            'customers'
         ));
     }
 
@@ -45,9 +50,31 @@ class SaleController extends Controller
         return response()->json($products);
     }
 
-    public function store(Request $request)
+    public function store(StoreSaleRequest $request)
     {
-        dd($request->all());
+        try {
+            $this->saleService->store($request->validated());
+            return back()->with('success', 'Sale created successfully.');
+        } catch (ValidationException $e) {
+            throw $e;
+        } catch (\Throwable $e) {
+            return back()
+                ->withInput()
+                ->with('error', 'Something went wrong while create a sale. Please try again.');
+        }
+    }
+
+    public function details(Sale $sale)
+    {
+        $sale->load([
+            'branch',
+            'customer',
+            'items.product',
+        ]);
+
+        $sale->loadCount('items as total_items');
+
+        return view('sale.details', compact('sale'));
     }
 
 }
