@@ -259,6 +259,14 @@ php artisan migrate:fresh --seed
 
 ---
 
+# Admin Login Credential
+
+Email:
+admin@gmail.com
+
+Password:
+12345678
+
 # Run Queue Worker
 
 Required for
