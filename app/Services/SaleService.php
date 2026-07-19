@@ -8,6 +8,7 @@ use App\Models\SaleItem;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use App\Jobs\SendInvoiceMailJob;
 
 class SaleService
 {
@@ -31,7 +32,7 @@ class SaleService
                 }
 
                 // Lost Customer
-                elseif ( $customer->latestSale->sale_date->lte(now()->subDays(config('crm.lost_customer_days', 90)))) {
+                elseif ($customer->latestSale->sale_date->lte(now()->subDays(config('crm.lost_customer_days', 90)))) {
                     $shouldIncreaseKpi = true;
                 }
             }
@@ -104,6 +105,14 @@ class SaleService
                     ->employee
                     ->increment('kpi_score');
             }
+
+            $sale->load([
+                'customer',
+                'branch',
+                'items.product',
+            ]);
+
+            SendInvoiceMailJob::dispatch($sale);
 
             return $sale;
         });
