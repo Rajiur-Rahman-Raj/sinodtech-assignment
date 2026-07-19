@@ -21,12 +21,25 @@ class SaleService
             ])
                 ->findOrFail($data['customer_id']);
 
-            $wasLost = false;
+            $shouldIncreaseKpi = false;
 
-            if ($customer->assignment && $customer->latestSale) {
-                $wasLost = $customer->latestSale->sale_date
-                    ->lte(now()->subDays(config('crm.lost_customer_days')));
+            if ($customer->assignment) {
+
+                // Never Purchased
+                if (!$customer->latestSale) {
+                    $shouldIncreaseKpi = true;
+                }
+
+                // Lost Customer
+                elseif ( $customer->latestSale->sale_date->lte(now()->subDays(config('crm.lost_customer_days', 90)))) {
+                    $shouldIncreaseKpi = true;
+                }
             }
+
+            // if ($customer->assignment && $customer->latestSale) {
+            //     $wasLost = $customer->latestSale->sale_date
+            //         ->lte(now()->subDays(config('crm.lost_customer_days')));
+            // }
 
 
             $sale = Sale::create([
@@ -86,7 +99,7 @@ class SaleService
                 'grand_total' => $grandTotal,
             ]);
 
-            if ($wasLost) {
+            if ($shouldIncreaseKpi) {
                 $customer->assignment
                     ->employee
                     ->increment('kpi_score');
