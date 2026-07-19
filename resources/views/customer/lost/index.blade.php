@@ -20,9 +20,16 @@
             </nav>
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        Lost Customers
+                    <div class="card-header d-flex justify-content-between">
+                        <p> Lost Customers</p>
+                        <form action="{{ route('send.mail.to.lost.customers') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-success btn-sm">
+                                Send Promotional Email
+                            </button>
+                        </form>
                     </div>
+
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
                             <thead>

@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/customers/{customer}/assign', [LostCustomerController::class, 'customerAssignToEmployeeStore'])
         ->name('customer.assign.store');
 
+    Route::post('/lost-customers/send-mail', [LostCustomerController::class, 'sendPromotionMail'])
+        ->name('send.mail.to.lost.customers');
+
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employees/details/{employee}', [EmployeeController::class, 'details'])->name('employee.details');
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Services\PromotionService;
 
 class LostCustomerController extends Controller
 {
@@ -69,5 +70,14 @@ class LostCustomerController extends Controller
         return redirect()
             ->route('lost.customer.index')
             ->with('success', 'Customer assigned successfully.');
+    }
+
+    public function sendPromotionMail(PromotionService $promotionService) {
+        $promotionService->sendToLostCustomers();
+
+        return back()->with(
+            'success',
+            'Promotional emails have been queued successfully.'
+        );
     }
 }
