@@ -45,10 +45,19 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('employee.index') }}" class="nav-link {{ request()->routeIs('employee.index.*') ? 'active' : '' }}">
+            <a href="{{ route('employee.index') }}"
+                class="nav-link {{ request()->routeIs('employee.index.*') ? 'active' : '' }}">
                 <i class="bi bi-person-badge me-2"></i>
                 Employees
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('sale.index') }}" class="nav-link {{ request()->routeIs('sale.*') ? 'active' : '' }}">
+                <i class="bi bi-cart-check me-2"></i>
+                Sales
+            </a>
+        </li>
+
     </ul>
 </div>

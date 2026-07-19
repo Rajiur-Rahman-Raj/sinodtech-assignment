@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 
-    });
 
-require __DIR__.'/auth.php';
+    Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
+    Route::get('/sale/create', [SaleController::class, 'create'])->name('sale.create');
+    Route::post('/sale/store', [SaleController::class, 'store'])->name('sale.store');
+
+    Route::get('/branch-products/{branch}', [SaleController::class, 'branchProducts'])->name('sale.branch.products');
+});
+
+require __DIR__ . '/auth.php';

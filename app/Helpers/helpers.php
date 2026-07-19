@@ -18,7 +18,7 @@ if (!function_exists('showEmptyState')) {
             <tr>
                 <td colspan="100%">
                     <div class="text-center">
-                        <p>No branch found</p>
+                        <p>' . __($message) . '</p>
                     </div>
                 </td>
             </tr>

@@ -17,4 +17,9 @@ class Customer extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }
