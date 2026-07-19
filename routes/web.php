@@ -36,7 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/lost-customers', [LostCustomerController::class, 'index'])
         ->name('lost.customer.index');
 
+    Route::get('/customers/{customer}/assign', [LostCustomerController::class, 'customerAssignToEmployee'])
+        ->name('customer.assign');
+
+    Route::post('/customers/{customer}/assign', [LostCustomerController::class, 'customerAssignToEmployeeStore'])
+        ->name('customer.assign.store');
+
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
+    Route::get('/employees/details/{employee}', [EmployeeController::class, 'details'])->name('employee.details');
 
 
     Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');

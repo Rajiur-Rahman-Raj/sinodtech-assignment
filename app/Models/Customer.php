@@ -28,4 +28,9 @@ class Customer extends Model
         return $this->hasOne(Sale::class)
             ->latestOfMany('sale_date');
     }
+
+    public function assignment()
+    {
+        return $this->hasOne(CustomerAssignment::class);
+    }
 }

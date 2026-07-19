@@ -47,7 +47,7 @@
                                         <td>{{ $branch->total_stock ?? 0 }}</td>
                                         <td> {!! getStatusBadge($branch->status) !!}</td>
                                         <td>
-                                            <a href="{{ route('branch.details', $branch->id) }}" title="details"><i class="bi bi-eye" style="font-size:20px"></i></a>
+                                            <a href="{{ route('branch.details', $branch) }}" title="details"><i class="bi bi-eye" style="font-size:20px"></i></a>
                                         </td>
                                     </tr>
                                 @empty

@@ -14,7 +14,7 @@
                     </li>
 
                     <li class="breadcrumb-item active">
-Employees
+                        Employees
                     </li>
                 </ol>
             </nav>
@@ -31,7 +31,9 @@ Employees
                                     <th scope="col">Employee Id</th>
                                     <th scope="col">name</th>
                                     <th scope="col">KPI Score</th>
+                                    <th scope="col">Total Assign</th>
                                     <th scope="col">status</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,8 +42,19 @@ Employees
                                         <th scope="row">{{ ++$key }}</th>
                                         <td>{{ $employee->employee_id }}</td>
                                         <td>{{ $employee->name }}</td>
-                                        <td>{{ $employee->kpi_score }}</td>
+                                        <td>
+                                            <span class="badge bg-success">
+                                                {{ $employee->kpi_score }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info"> {{ $employee->total_assign }}</span>
+                                        </td>
                                         <td> {!! getStatusBadge($employee->status) !!}</td>
+                                        <td>
+                                            <a href="{{ route('employee.details', $employee) }}" title="details"><i
+                                                    class="bi bi-eye" style="font-size:20px"></i></a>
+                                        </td>
                                     </tr>
                                 @empty
                                     {!! showEmptyState('No employees found') !!}

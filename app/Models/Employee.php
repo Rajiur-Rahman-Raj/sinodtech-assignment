@@ -20,4 +20,9 @@ class Employee extends Model
         'kpi_score' => 'integer',
         'status' => 'boolean',
     ];
+
+    public function assignments()
+    {
+        return $this->hasMany(CustomerAssignment::class);
+    }
 }

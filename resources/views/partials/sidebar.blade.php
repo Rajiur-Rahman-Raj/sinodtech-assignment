@@ -54,7 +54,7 @@
 
         <li class="nav-item">
             <a href="{{ route('employee.index') }}"
-                class="nav-link {{ request()->routeIs('employee.index.*') ? 'active' : '' }}">
+                class="nav-link {{ request()->routeIs(['employee.index', 'employee.details']) ? 'active' : '' }}">
                 <i class="bi bi-person-badge me-2"></i>
                 Employees
             </a>

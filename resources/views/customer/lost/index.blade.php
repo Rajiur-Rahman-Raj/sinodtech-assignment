@@ -32,6 +32,7 @@
                                     <th scope="col">phone</th>
                                     <th scope="col">Last Purchase</th>
                                     <th scope="col">Inactive Days</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,6 +56,19 @@
                                                 N/A
                                             @endif
                                         </td>
+                                        @if ($customer->assignment)
+                                            <td>
+                                                Already Assigned
+                                            </td>
+                                        @else
+                                            <td>
+                                                <a href="{{ route('customer.assign', $customer) }}"
+                                                    class="btn btn-sm btn-primary" title="details">
+                                                    Assign Employee
+                                                </a>
+                                            </td>
+                                        @endif
+
                                     </tr>
                                 @empty
                                     {!! showEmptyState('No customers found') !!}
