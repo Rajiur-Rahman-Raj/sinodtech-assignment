@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Customer;
 use App\Models\Sale;
 use App\Models\SaleItem;
 use App\Models\Inventory;
@@ -13,6 +14,20 @@ class SaleService
     public function store(array $data): Sale
     {
         return DB::transaction(function () use ($data) {
+
+            $customer = Customer::with([
+                'latestSale',
+                'assignment.employee'
+            ])
+                ->findOrFail($data['customer_id']);
+
+            $wasLost = false;
+
+            if ($customer->assignment && $customer->latestSale) {
+                $wasLost = $customer->latestSale->sale_date
+                    ->lte(now()->subDays(config('crm.lost_customer_days')));
+            }
+
 
             $sale = Sale::create([
                 'invoice_no' => generateInvoiceNo(),
@@ -70,6 +85,12 @@ class SaleService
             $sale->update([
                 'grand_total' => $grandTotal,
             ]);
+
+            if ($wasLost) {
+                $customer->assignment
+                    ->employee
+                    ->increment('kpi_score');
+            }
 
             return $sale;
         });
