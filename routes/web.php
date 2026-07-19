@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/details/{product}', [ProductController::class, 'details'])->name('product.details');
 
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/customers/{customer}', [CustomerController::class, 'details'])
+        ->name('customer.details');
+
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 
 

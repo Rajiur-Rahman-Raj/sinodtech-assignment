@@ -15,6 +15,10 @@ class Sale extends Model
         'status',
     ];
 
+    protected $casts = [
+        'sale_date' => 'date',
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

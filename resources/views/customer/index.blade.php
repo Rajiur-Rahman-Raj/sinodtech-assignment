@@ -32,6 +32,9 @@
                                     <th scope="col">phone</th>
                                     <th scope="col">address</th>
                                     <th scope="col">status</th>
+                                    <th width="120">
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,6 +45,12 @@
                                         <td>{{ $customer->phone }}</td>
                                         <td>{{ $customer->address }}</td>
                                         <td> {!! getStatusBadge($customer->status) !!}</td>
+                                        <td>
+                                            <a href="{{ route('customer.details', $customer) }}"
+                                                class="btn btn-sm btn-primary" title="details">
+                                                <i class="bi bi-eye"style="font-size:20px"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @empty
                                     {!! showEmptyState('No customers found') !!}
