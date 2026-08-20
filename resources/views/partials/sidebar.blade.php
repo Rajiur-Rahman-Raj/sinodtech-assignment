@@ -67,5 +67,14 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="{{ route('google.map.index') }}"
+                class="nav-link {{ request()->routeIs('google.map.*') ? 'active' : '' }}">
+                <i class="bi bi-geo-alt me-2"></i>
+                Google Maps
+            </a>
+        </li>
+
+
     </ul>
 </div>

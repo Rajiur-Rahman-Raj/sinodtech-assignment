@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LostCustomerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\GoogleMapController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/sale/details/{sale}', [SaleController::class, 'details'])->name('sale.details');
 
     Route::get('/branch-products/{branch}', [SaleController::class, 'branchProducts'])->name('sale.branch.products');
+
+    Route::get('/google-map', [GoogleMapController::class, 'index'])->name('google.map.index');
 });
 
 require __DIR__ . '/auth.php';
