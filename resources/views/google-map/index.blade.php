@@ -75,22 +75,65 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <button type="button" id="save-location" class="btn btn-primary">
+                                    <i class="bi bi-check-circle"></i>
+                                    Confirm Location
+                                </button>
+                            </div>
+                        </div>
+
                         <div id="google-map"></div>
 
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
 @endsection
 
 @push('scripts')
     <script>
+        document.getElementById('save-location').addEventListener('click', function() {
+
+            const address = document.getElementById('address').value;
+            const latitude = document.getElementById('latitude').value;
+            const longitude = document.getElementById('longitude').value;
+
+            if (!address || !latitude || !longitude) {
+                alert('Please select a location first.');
+                return;
+            }
+
+            $.ajax({
+                url: "{{ route('user.locations.store') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    address: address,
+                    latitude: latitude,
+                    longitude: longitude,
+                },
+
+                success: function(response) {
+
+                    console.log(response);
+
+                    alert(response.message);
+                },
+
+                error: function(xhr) {
+
+                    console.error(xhr.responseJSON);
+
+                    alert('Something went wrong.');
+                }
+            });
+        });
+
+
         let map;
         let marker;
         let geocoder;

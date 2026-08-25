@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\GoogleMapController;
+use App\Http\Controllers\Admin\UserLocationController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/branch-products/{branch}', [SaleController::class, 'branchProducts'])->name('sale.branch.products');
 
     Route::get('/google-map', [GoogleMapController::class, 'index'])->name('google.map.index');
+    Route::post('/user-locations', [UserLocationController::class, 'store'])->name('user.locations.store');
+
+    Route::get('/test-delivery-logic', [UserLocationController::class, 'testDeliveryLogic'])->name('test.delivery.logic');
 });
 
 require __DIR__ . '/auth.php';
