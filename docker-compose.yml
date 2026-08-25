@@ -50,14 +50,28 @@ services:
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-    #   MYSQL_USER: ${DB_USERNAME}
-    #   MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
 
     volumes:
       - mysql_data:/var/lib/mysql
 
     networks:
       - sinodtech
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: sinodtech_phpmyadmin
+    restart: unless-stopped
+    environment:
+        PMA_HOST: mysql
+        PMA_PORT: 3306
+    ports:
+        - "8081:80"
+    depends_on:
+        - mysql
+    networks:
+        - sinodtech
 
 
 networks:
