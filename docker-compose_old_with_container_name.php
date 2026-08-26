@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
 
+    container_name: sinodtech_app
+
     restart: unless-stopped
 
     working_dir: /var/www
@@ -15,14 +17,15 @@ services:
     networks:
       - sinodtech
 
-
   nginx:
-    image: ${DOCKER_NGINX_IMAGE}
+    image: nginx:alpine
+
+    container_name: sinodtech_nginx
 
     restart: unless-stopped
 
     ports:
-      - "${DOCKER_APP_PORT}:80"
+      - "8080:80"
 
     volumes:
       - ./:/var/www
@@ -34,14 +37,15 @@ services:
     networks:
       - sinodtech
 
-
   mysql:
-    image: ${DOCKER_MYSQL_IMAGE}
+    image: mysql:8.0
+
+    container_name: sinodtech_mysql
 
     restart: unless-stopped
 
     ports:
-      - "${DOCKER_DB_PORT}:3306"
+      - "3307:3306"
 
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -55,24 +59,19 @@ services:
     networks:
       - sinodtech
 
-
   phpmyadmin:
-    image: ${DOCKER_PHPMYADMIN_IMAGE}
-
+    image: phpmyadmin:latest
+    container_name: sinodtech_phpmyadmin
     restart: unless-stopped
-
     environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-
+        PMA_HOST: mysql
+        PMA_PORT: 3306
     ports:
-      - "${DOCKER_PHPMYADMIN_PORT}:80"
-
+        - "8081:80"
     depends_on:
-      - mysql
-
+        - mysql
     networks:
-      - sinodtech
+        - sinodtech
 
 
 networks:

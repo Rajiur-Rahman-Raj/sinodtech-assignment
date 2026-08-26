@@ -1,5 +1,11 @@
 FROM php:8.3-fpm
 
+LABEL org.opencontainers.image.maintainer="Rajiur Rahman"
+LABEL org.opencontainers.image.title="PredictionLA HRM"
+LABEL org.opencontainers.image.description="Dockerized Laravel HRM Application"
+LABEL org.opencontainers.image.authors="PredictionLA"
+LABEL org.opencontainers.image.vendor="PredictionLA"
+
 WORKDIR /var/www
 
 RUN apt-get update && apt-get install -y \
