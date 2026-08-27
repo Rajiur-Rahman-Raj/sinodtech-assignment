@@ -74,6 +74,19 @@ services:
     networks:
       - sinodtech
 
+  redis:
+    image: ${DOCKER_REDIS_IMAGE}
+
+    restart: unless-stopped
+
+    command: redis-server --appendonly yes
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - sinodtech
+
 
 networks:
   sinodtech:
@@ -82,3 +95,4 @@ networks:
 
 volumes:
   mysql_data:
+  redis_data:

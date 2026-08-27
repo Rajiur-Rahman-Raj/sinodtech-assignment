@@ -1,0 +1,19 @@
+Cache::put('docker_test', 'redis_working', 600);
+Cache::get('docker_test');
+exit
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+exit
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+Cache::get('production_cache_test');
+exit
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+exit
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+exit
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+Cache::get('production_cache_test');
+exit
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+Cache::put('production_cache_test', 'redis_cache_working', 600);
+Cache::get('production_cache_test');
+config('queue.default');
