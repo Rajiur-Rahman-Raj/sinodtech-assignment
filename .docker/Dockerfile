@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     zip \
+    supervisor \
     libzip-dev \
     libpng-dev \
     libonig-dev \
@@ -46,7 +47,13 @@ RUN composer install \
     --optimize-autoloader \
     --no-scripts
 
+
 COPY . .
+
+COPY .docker/supervisor/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
+COPY .docker/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
 
 RUN composer dump-autoload \
     --optimize \
@@ -58,8 +65,6 @@ RUN chown -R www-data:www-data \
     storage \
     bootstrap/cache
 
-USER www-data
-
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["/usr/local/bin/start.sh"]

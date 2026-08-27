@@ -17,3 +17,30 @@ Cache::put('production_cache_test', 'redis_cache_working', 600);
 Cache::put('production_cache_test', 'redis_cache_working', 600);
 Cache::get('production_cache_test');
 config('queue.default');
+exit
+App\Jobs\TestRedisJob::dispatch();
+exit
+App\Jobs\TestRedisJob::dispatch();
+exit
+config('queue.default');
+config('queue.connections.redis');
+exit
+App\Jobs\TestRedisJob::dispatch();
+exit
+Redis::connection()->ping();
+Redis::connection()->ping();
+exit
+app('redis')->connection()->ping();
+app('queue')->connection()->getDriver();
+exit
+app('redis')->connection()->ping();
+exit
+app('redis')->connection()->ping();
+exit
+App\Jobs\TestRedisJob::dispatch();
+exit
+app('queue')->connection('redis')->push(new App\Jobs\TestRedisJob);
+exit
+config('queue.default');
+config('database.redis.default');
+config('database.redis.options.prefix');
