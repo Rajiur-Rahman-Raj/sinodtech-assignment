@@ -24,7 +24,6 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
         $product = $productService->createProduct($validatedData);
-
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
 

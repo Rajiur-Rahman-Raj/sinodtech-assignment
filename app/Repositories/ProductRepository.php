@@ -12,13 +12,7 @@ class ProductRepository implements ProductRepositoryInterface
             'name' => $data['name'],
             'sku' => $data['sku'],
             'price' => $data['price'],
-            'status' => $data['status'],
-        ]);
-
-        // Create inventory for the product in the specified branch
-        $product->inventories()->create([
-            'branch_id' => $data['branch_id'],
-            'quantity' => $data['quantity'],
+            'status' => $data['status'] ?? true,
         ]);
 
         return $product;
