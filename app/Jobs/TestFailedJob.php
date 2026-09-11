@@ -17,6 +17,7 @@ class TestFailedJob implements ShouldQueue
 
     public function handle(): void
     {
+        //ekhane ekta expection throw korte hobe faild job try korte hole
         \Log::info('TestFailedJob executed successfully after retry.');
     }
 }

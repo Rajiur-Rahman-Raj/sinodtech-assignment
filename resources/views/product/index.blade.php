@@ -21,7 +21,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        All Branches
+                        All Products
                     </div>
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
