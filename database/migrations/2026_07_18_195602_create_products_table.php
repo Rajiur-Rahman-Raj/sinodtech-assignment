@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('sku', 100)->unique();
+            $table->string('sku', 100)->nullable();
             $table->decimal('price', 12, 2);
             $table->boolean('status')->default(true);
             $table->timestamps();

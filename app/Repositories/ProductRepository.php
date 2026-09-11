@@ -10,7 +10,7 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $product = Product::create([
             'name' => $data['name'],
-            'sku' => $data['sku'],
+            // 'sku' => $data['sku'],
             'price' => $data['price'],
             'status' => $data['status'] ?? true,
         ]);
