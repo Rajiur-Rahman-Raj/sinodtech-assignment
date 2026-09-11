@@ -20,8 +20,9 @@
             </nav>
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        All Products
+                    <div class="card-header d-flex justify-between align-items-center">
+                        <h4>All Products</h4>
+                        <a class="btn btn-sm btn-primary" href="{{ route('product.create') }}">Add Product</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
