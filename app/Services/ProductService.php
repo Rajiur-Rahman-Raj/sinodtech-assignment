@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\ProductCreated;
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 
@@ -24,6 +25,9 @@ class ProductService
             'branch_id' => $data['branch_id'],
             'quantity' => $data['quantity'],
         ]);
+
+        // Broadcast the ProductCreated event
+        ProductCreated::dispatch($product);
 
         return $product;
 

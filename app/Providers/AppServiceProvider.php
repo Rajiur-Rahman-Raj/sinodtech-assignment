@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\ProductCreated;
+use App\Listeners\ProductCreatedLog;
 use App\Models\Product;
 use App\Observers\ProductObserver;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\ProductRepository;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +27,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Product::observe(ProductObserver::class);
+
+        Event::listen(
+            ProductCreated::class,
+            ProductCreatedLog::class
+        );
+
     }
 }
